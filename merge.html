@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merge Case Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    <link rel="stylesheet" href="popup.css"> <!-- Re-use some popup styles for consistency -->
+    <link rel="stylesheet" href="merge.css">
+</head>
+<body>
+    <div class="container merge-container">
+        <div class="title">Merge Exported Case Notes</div>
+
+        <div class="merge-instructions">
+            <p>Select two exported JSON files to compare and merge. The tool will identify unique entries, duplicates, and conflicts.</p>
+            <p>For conflicts, you can choose which version to keep or manually edit the entry.</p>
+        </div>
+
+        <div class="file-selection-area">
+            <div class="file-input-group">
+                <label for="file1">File 1 (e.g., Your Export):</label>
+                <input type="file" id="file1" accept=".json">
+                <span id="file1Name" class="file-name-display">No file selected</span>
+            </div>
+            <div class="file-input-group">
+                <label for="file2">File 2 (e.g., Teammate's Export):</label>
+                <input type="file" id="file2" accept=".json">
+                <span id="file2Name" class="file-name-display">No file selected</span>
+            </div>
+        </div>
+
+        <div class="button-group merge-actions">
+            <button id="processFilesBtn" class="action-button primary-action">
+                <span class="material-symbols-outlined">compare_arrows</span> Process & Compare Files
+            </button>
+        </div>
+
+        <div id="comparisonResults" class="comparison-results-area" style="display: none;">
+            <h3 class="results-title">Comparison Results</h3>
+
+            <div class="results-summary">
+                <p>File 1 Entries: <span id="file1Count">0</span></p>
+                <p>File 2 Entries: <span id="file2Count">0</span></p>
+                <p>Total Unique in Merged: <span id="totalUniqueCount">0</span></p>
+                <p>Conflicts Found: <span id="conflictCount">0</span></p>
+            </div>
+
+            <div class="result-section conflicts-section">
+                <h4><span class="material-symbols-outlined">warning</span> Conflicts (<span id="conflictsListCount">0</span>) <small>- Resolve below</small></h4>
+                <div id="conflictsList" class="result-list conflict-items-list">
+                    <!-- Conflict items will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <div class="result-section">
+                <h4><span class="material-symbols-outlined">person</span> Unique to File 1 (<span id="uniqueFile1Count">0</span>)</h4>
+                <div id="uniqueFile1List" class="result-list"></div>
+            </div>
+
+            <div class="result-section">
+                <h4><span class="material-symbols-outlined">group</span> Unique to File 2 (<span id="uniqueFile2Count">0</span>)</h4>
+                <div id="uniqueFile2List" class="result-list"></div>
+            </div>
+
+            <div class="result-section">
+                <h4><span class="material-symbols-outlined">sync</span> Duplicates (Identical - Auto-merged) (<span id="duplicatesCount">0</span>)</h4>
+                <div id="duplicatesList" class="result-list"></div>
+            </div>
+
+            <div class="result-section removed-section" id="removedEntriesSection" style="display: none;">
+                <h4><span class="material-symbols-outlined">delete_sweep</span> Removed/Ignored Entries (<span id="removedEntriesCount">0</span>)</h4>
+                <div id="removedEntriesList" class="result-list removed-items-list"></div>
+            </div>
+
+            <div class="button-group merge-actions">
+                <button id="exportMergedBtn" class="action-button success-action" style="display: none;">
+                    <span class="material-symbols-outlined">download</span> Export Merged Data
+                </button>
+                 <button id="importToExtensionBtn" class="action-button info-action" style="display: none;" title="Import the final merged data directly into your extension storage (will overwrite existing data)">
+                    <span class="material-symbols-outlined">storage</span> Import to Extension
+                </button>
+            </div>
+        </div>
+
+        <!-- Edit Modal for Conflicts (Similar to popup.html's modal but adapted) -->
+        <div id="editConflictModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="conflictModalTitle">Resolve Conflict</h3>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="conflictModalKey">
+                    <div class="conflict-data-display">
+                        <p class="conflict-case-identifier"><strong>Case:</strong> <span id="conflictCaseInfo"></span></p>
+                        <!-- Field-by-field comparison will be injected here by JS -->
+                    </div>
+                    <hr>
+                    <p><strong>Edit Merged Version:</strong></p>
+                    <div class="form-group">
+                        <label for="conflictNote">General Note:</label>
+                        <textarea id="conflictNote" rows="3"></textarea>
+                    </div>
+                    <div class="form-group form-group-inline">
+                        <label for="conflictUrgentNote">Urgent Note:</label>
+                        <textarea id="conflictUrgentNote" rows="2"></textarea>
+                    </div>
+                    <div class="form-group form-group-inline">
+                        <label for="conflictIsUrgent">Urgent:</label>
+                        <input type="checkbox" id="conflictIsUrgent" style="width: auto; height: auto;">
+                    </div>
+                    <div class="form-group">
+                        <label for="conflictStatusSymbol">Status Symbol:</label>
+                        <select id="conflictStatusSymbol"></select> <!-- Simplified for now -->
+                    </div>
+                    <div class="form-group form-group-inline">
+                        <label for="conflictStatusColor">Status Color:</label>
+                        <input type="color" id="conflictStatusColor">
+                    </div>
+                    <div class="form-group">
+                        <label for="conflictCaseLinkUrl">Case Link URL:</label>
+                        <input type="url" id="conflictCaseLinkUrl">
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button id="saveConflictBtn" class="modal-button primary">Save Merged Version</button>
+                    <button id="cancelConflictBtn" class="modal-button secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="popup.js" defer></script> <!-- For STATUS_SYMBOLS, parseCompositeKey -->
+    <script src="merge.js" defer></script>
+</body>
+</html>

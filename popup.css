@@ -1,0 +1,536 @@
+body {
+  width: 380px; /* Slightly wider */
+  min-height: 400px; /* Min height */
+  max-height: 550px; /* Max height */
+  padding: 16px; /* Adjusted padding */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #f6f8fa; /* Lighter background */
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1F2937; /* Darker title */
+  margin-bottom: 12px; /* More space below title */
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e7eb; /* Lighter border */
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+/* Updated List Styles */
+.case-metadata-list { /* Renamed class */
+  flex-grow: 1; /* Allow list to take available space */
+  overflow-y: auto;
+  margin: 0 0 12px 0; /* Margin bottom */
+  background: white;
+  border: 1px solid #d1d5db; /* Slightly darker border */
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.case-item {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  background: white;
+  transition: background-color 0.1s ease;
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  gap: 4px; /* Space between elements */
+}
+.case-item:last-child {
+  border-bottom: none;
+}
+.case-item:hover {
+  background: #f9fafb; /* Very light hover */
+}
+.case-item.is-urgent { /* Style for urgent items */
+    border-left: 3px solid #ef4444; /* Red left border */
+    padding-left: 9px; /* Adjust padding */
+}
+
+.case-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.case-account {
+  color: #1a7f37; /* Accent color for account name */
+  font-weight: 600;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-grow: 1; /* Allow account name to take space */
+}
+.case-symbol {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; /* Prevent symbol shrinking */
+}
+.case-symbol .material-symbols-outlined {
+    font-size: 18px; /* Match other icons */
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    line-height: 1;
+}
+
+.case-subject {
+  color: #4b5563; /* Darker gray */
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: normal;
+}
+
+.case-note-preview {
+    font-size: 11px;
+    color: #6b7280; /* Lighter gray */
+    font-style: italic;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 2px;
+}
+.case-note-preview:empty {
+    display: none; /* Hide if no preview */
+}
+
+.case-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+  font-size: 10px;
+  color: #9ca3af; /* Very light gray */
+}
+.case-id {
+    font-weight: 400;
+}
+
+/* Styles for inline action buttons (Edit/Delete) */
+.case-actions {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  gap: 6px;
+  margin-top: 6px;
+}
+.case-action-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 6px;
+  font-size: 10px;
+  font-weight: 500;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #4b5563;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  text-decoration: none; /* For anchor tags styled as buttons */
+}
+.case-action-button:hover { background-color: #f9fafb; border-color: #adb5bd; }
+.case-action-button .material-symbols-outlined { font-size: 14px; line-height: 1; }
+.case-action-button.delete { color: #dc3545; border-color: #f8d7da; }
+.case-action-button.delete:hover { background-color: #f8d7da; color: #842029; border-color: #f5c2c7;}
+
+.no-cases {
+  color: #6b7280;
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+  font-size: 13px;
+}
+
+/* Button Group */
+.button-group {
+  display: grid; /* Use grid for equal width */
+  grid-template-columns: repeat(4, 1fr); /* Four equal columns */
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+button.action-button { /* Specific class for action buttons */
+  padding: 8px 10px; /* Slightly smaller padding */
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center content */
+  gap: 6px; /* Smaller gap */
+  transition: all 0.15s ease;
+  color: #374151; /* Darker text */
+  font-size: 12px; /* Smaller font */
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+}
+button.action-button:hover {
+  background: #f3f4f6; /* Lighter hover */
+  border-color: #9ca3af;
+}
+button.action-button svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+button.action-button .material-symbols-outlined { /* For Material Icons in buttons */
+  font-size: 16px; /* Adjust as needed */
+}
+#fileInput { display: none; }
+
+/* Quick Guide */
+.quick-guide {
+  flex-shrink: 0;
+  margin-bottom: 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background-color: #fff;
+}
+.quick-guide-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 8px 12px;
+  color: #374151;
+  font-weight: 500;
+  font-size: 13px;
+}
+.quick-guide-header .material-symbols-outlined {
+  font-size: 20px;
+  transition: transform 0.2s ease;
+  color: #6b7280;
+}
+.quick-guide-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  padding: 0 12px;
+  font-size: 12px;
+  color: #4b5563;
+}
+.quick-guide-content.expanded {
+  max-height: 400px; /* Adjust as needed */
+  padding-bottom: 12px;
+}
+.quick-guide-header.expanded .material-symbols-outlined {
+  transform: rotate(180deg);
+}
+.instructions ul { margin: 8px 0 0 0; padding-left: 18px; }
+.instructions li { margin-bottom: 6px; line-height: 1.4; }
+.icon-legend { display: flex; align-items: center; gap: 6px; margin: 4px 0; }
+.icon-legend img, .icon-legend .material-symbols-outlined { width: 16px; height: 16px; font-size: 16px; line-height: 1; flex-shrink: 0; }
+.icon-legend .material-symbols-outlined { color: #6b7280; }
+.icon-legend .urgent-icon.filled { color: #dc2626; font-variation-settings: 'FILL' 1, 'wght' 500; }
+.icon-legend .notes-icon.filled { color: #0ea5e9; font-variation-settings: 'FILL' 1; } /* Example color */
+.icon-legend .notes-icon.symbol { color: #fbbf24; } /* Example color */
+
+.documentation-link-container {
+  margin-top: 10px; /* Space above the link */
+  margin-bottom: 8px; /* Space below the link */
+  flex-shrink: 0;
+  text-align: center; /* Center the button-like link */
+}
+.documentation-link {
+  text-decoration: none;
+  display: inline-flex; /* To behave like other action buttons */
+  width: auto; /* Adjust width based on content */
+  padding-left: 15px; /* More padding for icon */
+  padding-right: 15px;
+}
+
+.refresh-note {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #6b7280;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* SLDS-like variables (local scope) */
+:root {
+    --slds-spacing-x-small: 0.5rem;
+    --slds-spacing-small: 0.75rem;
+    --slds-spacing-medium: 1rem;
+    --slds-border-radius-medium: 0.25rem;
+}
+
+/* Modal Styles - Updated for SLDS Look & Feel */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+  /* Align modal content in the center */
+  /* display: flex; /* Use JS to toggle display */
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0; /* Remove padding, handle inside */
+  border: none; /* Remove default border */
+  width: 90%; /* Responsive width */
+  max-width: 400px; /* Slightly wider for better form layout */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 0; /* Remove gap, handled by padding in body/actions */
+}
+
+.modal-header {
+    padding: var(--slds-spacing-medium);
+    border-bottom: 1px solid #dddbda; /* SLDS border color */
+    flex-shrink: 0;
+}
+.modal-title {
+  margin: 0;
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  color: #080707; /* SLDS heading color */
+  line-height: 1.25;
+}
+
+.modal-body {
+    padding: var(--slds-spacing-medium);
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--slds-spacing-medium); /* Space between form elements */
+}
+
+/* SLDS Form Element Styling */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--slds-spacing-x-small); /* SLDS gap */
+}
+.form-group label {
+  font-size: 0.75rem; /* 12px */
+  font-weight: 500;
+  color: #3e3e3c; /* SLDS label color */
+  margin-bottom: 0; /* Reset margin */
+}
+.form-group input[type="text"],
+.form-group input[type="url"],
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0 var(--slds-spacing-small); /* Horizontal padding */
+  height: 32px; /* SLDS input height */
+  line-height: 30px; /* Vertically center text */
+  border: 1px solid #dddbda; /* SLDS border */
+  border-radius: var(--slds-border-radius-medium);
+  font-size: 0.8125rem; /* 13px */
+  box-sizing: border-box; /* Include padding in width */
+  background-color: white;
+  transition: border-color 0.1s linear, box-shadow 0.1s linear;
+}
+.form-group input[type="text"]:focus,
+.form-group input[type="url"]:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #1b96ff; /* SLDS focus color */
+    box-shadow: 0 0 3px #1b96ff;
+    outline: none;
+}
+.form-group textarea {
+  resize: vertical; /* Allow vertical resize */
+  min-height: 60px;
+  line-height: 1.5; /* Adjust line height for textarea */
+  padding-top: var(--slds-spacing-x-small); /* Add top padding */
+  padding-bottom: var(--slds-spacing-x-small); /* Add bottom padding */
+}
+.form-group input[type="color"] {
+    padding: 0; /* Remove padding */
+    height: 32px; /* Match other inputs */
+    width: 40px; /* Adjust width */
+    vertical-align: middle;
+    border: 1px solid #dddbda;
+    border-radius: var(--slds-border-radius-medium);
+    cursor: pointer;
+}
+.form-group small {
+    font-size: 0.75rem; /* 12px */
+    color: #514f4d; /* SLDS help text color */
+}
+.form-group-inline {
+    display: flex; /* Ensure inline group uses flex */
+    flex-direction: row;
+    align-items: center;
+    gap: var(--slds-spacing-x-small); /* Consistent gap */
+}
+.form-group-inline label {
+    margin-bottom: 0; /* Remove bottom margin for inline label */
+    flex-shrink: 0; /* Prevent label from shrinking */
+}
+/* Style for the status icon preview next to the dropdown */
+/* Container for custom dropdown */
+.status-preview-container {
+    position: relative; /* Needed for positioning the dropdown list */
+    display: flex;
+    flex-direction: column; /* Stack button and list */
+    width: 100%; /* Take full width within form-group */
+}
+/* Style the preview to look like the select input */
+#statusIconPreview {
+    display: flex;
+    align-items: center;
+    gap: var(--slds-spacing-x-small);
+    width: 100%; /* Changed from 90% */
+    height: 32px; /* Match input height */
+    padding: 0 var(--slds-spacing-small);
+    border: 1px solid #dddbda;
+    border-radius: var(--slds-border-radius-medium);
+    background-color: white;
+    cursor: pointer; /* Indicate it's clickable */
+    font-size: 0.8125rem; /* Match input font size */
+    color: #080707; /* Match input text color */
+    line-height: 30px;
+    box-sizing: border-box; /* Added */
+}
+#statusIconPreview:focus { /* Add focus style */
+    border-color: #1b96ff;
+    box-shadow: 0 0 3px #1b96ff;
+    outline: none;
+}
+#statusIconPreview .material-symbols-outlined {
+    font-size: 18px; /* Icon size */
+    color: #514f4d; /* Icon color */
+    flex-shrink: 0;
+}
+/* Custom Dropdown List Styles */
+#statusDropdownList {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%; /* Position below the preview button */
+    left: 0; /* Align with left edge of container */
+    right: 0; /* Align with right edge of container */
+    background-color: white;
+    border: 1px solid #dddbda;
+    border-top: none; /* Remove top border as it connects */
+    border-radius: 0 0 var(--slds-border-radius-medium) var(--slds-border-radius-medium);
+    max-height: 220px; /* Increased height limit */
+    overflow-y: auto;
+    z-index: 1001; /* Ensure it's above other elements */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+    box-sizing: border-box; /* Include padding/border in width */
+}
+#statusDropdownList.visible {
+    display: block; /* Show the list */
+}
+#statusDropdownList li {
+    display: flex;
+    align-items: center;
+    gap: var(--slds-spacing-x-small);
+    padding: var(--slds-spacing-x-small) var(--slds-spacing-small);
+    cursor: pointer;
+    font-size: 0.8125rem;
+    color: #080707;
+}
+#statusDropdownList li:hover {
+    background-color: #f3f2f2; /* SLDS hover */
+}
+#statusDropdownList li .material-symbols-outlined {
+    font-size: 18px;
+    color: #514f4d;
+    flex-shrink: 0;
+}
+.inline-button {
+    padding: 0 var(--slds-spacing-x-small);
+    height: 24px; /* Smaller button */
+    font-size: 0.75rem;
+    border: 1px solid #dddbda;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    margin-left: 5px;
+    vertical-align: middle;
+    flex-shrink: 0; /* Prevent button shrinking */
+}
+.inline-button:hover {
+    background-color: #f3f2f2; /* SLDS hover */
+}
+
+/* Color Swatch Styles */
+.color-swatch-container {
+  display: flex;
+  gap: 6px; /* Space between swatches */
+  margin-top: 6px; /* Space above swatches */
+  padding-left: 5px; /* Align slightly with input */
+  flex-wrap: wrap; /* Allow wrapping */
+}
+.color-swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: transform 0.1s ease, border-color 0.1s ease;
+}
+.color-swatch:hover {
+  transform: scale(1.1);
+  border-color: #555;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--slds-spacing-x-small);
+  padding: var(--slds-spacing-small) var(--slds-spacing-medium); /* SLDS footer padding */
+  border-top: 1px solid #dddbda; /* SLDS border */
+  background-color: #f3f2f2; /* SLDS footer background */
+  flex-shrink: 0;
+  border-bottom-left-radius: 8px; /* Match modal radius */
+  border-bottom-right-radius: 8px;
+}
+
+/* SLDS Button Styling */
+.modal-button {
+  padding: 0 var(--slds-spacing-medium);
+  height: 32px; /* SLDS button height */
+  border: 1px solid #dddbda; /* Default border */
+  border-radius: var(--slds-border-radius-medium);
+  cursor: pointer;
+  font-size: 0.8125rem; /* 13px */
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  background-color: white; /* Default background */
+  color: #0176d3; /* Default text color */
+}
+.modal-button.primary {
+  background-color: #0176d3; /* SLDS brand blue */
+  color: white;
+  border-color: #0176d3;
+}
+.modal-button.primary:hover {
+  background-color: #015ba7; /* Darker blue */
+}
+.modal-button.secondary {
+  /* Uses default styles */
+}
+.modal-button.secondary:hover {
+  background-color: #f3f2f2; /* Light gray hover */
+}
