@@ -1,11 +1,11 @@
-## Salesforce Enhancement Extension - Documentation
+## bswift Salesforce Enhancement Suite - Documentation
 
-This document provides documentation for the Salesforce Enhancement Extension.
+This document provides documentation for the bswift Salesforce Enhancement Suite.
 
 ---
 
 ## Overview
-The Salesforce Enhancement Extension is designed to improve the user experience within Salesforce, particularly for case management. It adds several visual and functional enhancements to Salesforce case list views and detail pages, focusing on bswift client IDs and related tasks. The goal is to streamline workflows, improve data visibility, and provide quick access to relevant information and tools.
+The bswift Salesforce Enhancement Suite is designed to improve the user experience within Salesforce, particularly for case management. It adds several visual and functional enhancements to Salesforce case list views and detail pages, focusing on bswift client IDs and related tasks. The goal is to streamline workflows, improve data visibility, and provide quick access to relevant information and tools.
 
 Before:
 ![Main View Before](https://github.com/MaffyxProjects/bswift-Salesforce-Enhancement-Suite/blob/main/2025-05-07%2011_06_37-Window.png?raw=true)
@@ -16,7 +16,7 @@ After:
 ## How to Use
 
 1.  **Installation:**
-    Download the extension files from: [Salesforce to Sharepoint Extension Files - 1.0.14 - Optimized.zip](https://foxhunt.s3.us-west-2.amazonaws.com/bswift/SFtoSPExtension/Salesforce+to+Sharepoint+Extension+Files+-+1.0.14+-+Optimized.zip).
+    Download the extension files from: [bswift Salesforce Enhancement Suite.zip](https://foxhunt.s3.us-west-2.amazonaws.com/bswift/SFtoSPExtension/bswift+Salesforce+Enhancement+Suite/bswift+Salesforce+Enhancement+Suite.zip).
     Then, install the extension in your Chromium-based browser (e.g., Google Chrome, Microsoft Edge) by enabling "Developer mode" in your browser's extensions page and using the "Load unpacked" option to select the downloaded and unzipped extension folder.
 
 2.  **Salesforce Navigation:** Navigate to a Salesforce case list view or a case detail page. The extension primarily targets these areas.
@@ -184,4 +184,4 @@ The extension consists of the following core files:
 
 ---
 
-Salesforce Enhancement Extension - Streamlining Your Case Management
+bswift Salesforce Enhancement Suite - Streamlining Your Case Management
