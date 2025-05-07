@@ -27,10 +27,9 @@ After:
 
 4.  **"Load & Group" Button (List Views):** If the list view is paginated (shows only a subset of cases), click the "Load & Group" button (usually located near other list view controls like "New", "Import"). This will attempt to scroll and load all cases in the current view, then apply all enhancements.
 
-5.  **Interacting with Action Buttons:**
-
 ![Button Grouping](https://github.com/MaffyxProjects/bswift-Salesforce-Enhancement-Suite/blob/main/2025-05-07%2010_58_42-Window.png?raw=true)
 
+5.  **Interacting with Action Buttons:**
     *   Click the **SharePoint icon** (![SharePoint](https://bswiftllc.sharepoint.com/_layouts/15/images/favicon.ico?rev=47)) to search for the client's Account Name in SharePoint Payroll documents.
     *   Click the **bswift icon** (![bswift](https://secure.bswift.com/images/ico/favicon.ico)) to copy the Client ID to your clipboard and open the bswift platform in a new tab.
     *   Click the **Urgent icon** (`priority_high` / `priority_high` ⚠️) to toggle the urgency status of the case. If marking as urgent, you'll be prompted for an optional urgent note.
@@ -44,10 +43,9 @@ After:
         *   If a link URL is already set for the case, clicking this button will open that URL in a new tab.
         *   If no link is set, it will open the Notes/Status modal, allowing you to add one.
 
-6.  **Using the Popup (Extension Icon):**
-
 ![Popup](https://github.com/MaffyxProjects/bswift-Salesforce-Enhancement-Suite/blob/main/2025-05-07%2011_13_58-Window.png?raw=true)
 
+7.  **Using the Popup (Extension Icon):**
     *   Click the extension icon in your browser toolbar to open the popup.
     *   Here, you can see a list of all cases for which you've saved metadata.
     *   Use the "Edit" or "Delete" buttons next to each entry to manage its data.
@@ -68,10 +66,10 @@ After:
 *   **Status-Based Row Highlighting:**
     *   Applies distinct background colors to case rows based on their status (e.g., 'In-Process', 'Assigned', 'On-Hold').
     *   Uses a modernized professional color palette for better visual distinction.
-*   **Urgent Case Management (via `urgencyManager.js`):**
-
+ 
 ![Case management](https://github.com/MaffyxProjects/bswift-Salesforce-Enhancement-Suite/blob/main/2025-05-07%2011_00_28-Window.png?raw=true)
 
+*   **Urgent Case Management (via `urgencyManager.js`):**
     *   **Mark as Urgent:** Allows users to toggle a case's urgency. Urgent cases are highlighted with a distinct red background in list views.
         Icon: `priority_high` (Normal) / `priority_high` (Urgent ⚠️)
     *   **Urgent Notes:** Users can add a specific note explaining the reason for urgency. This note is visible in the urgent button's tooltip.
