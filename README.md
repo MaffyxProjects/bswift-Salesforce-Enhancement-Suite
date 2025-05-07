@@ -25,14 +25,14 @@ The Salesforce Enhancement Extension is designed to improve the user experience 
 5.  **Interacting with Action Buttons:**
     *   Click the **SharePoint icon** (![SharePoint](https://bswiftllc.sharepoint.com/_layouts/15/images/favicon.ico?rev=47)) to search for the client's Account Name in SharePoint Payroll documents.
     *   Click the **bswift icon** (![bswift](https://secure.bswift.com/images/ico/favicon.ico)) to copy the Client ID to your clipboard and open the bswift platform in a new tab.
-    *   Click the **Urgent icon** (`priority_high` / `priority_high` filled) to toggle the urgency status of the case. If marking as urgent, you'll be prompted for an optional urgent note.
-    *   Click the **Notes/Status icon** (`edit_note` / `edit_note` filled / `warning` filled) to open a modal. In this modal, you can:
+    *   Click the **Urgent icon** (`priority_high` / `priority_high` ⚠️) to toggle the urgency status of the case. If marking as urgent, you'll be prompted for an optional urgent note.
+    *   Click the **Notes/Status icon** (`edit_note` 📝 / `edit_note` (with note) 📝 / `warning` (with symbol) ⚠️) to open a modal. In this modal, you can:
         *   Mark/unmark the case as urgent and edit the urgent note.
         *   Add or edit a general note for the case.
-        *   Select a status symbol (e.g., `check_circle`, `warning`) and customize its color.
+        *   Select a status symbol (e.g., `check_circle` ✅, `warning` ⚠️) and customize its color.
         *   Add or edit a case-specific link URL.
         *   Use the "Clear All" button in the modal to remove all custom metadata (notes, urgency, symbol, link) for that specific case.
-    *   Click the **Link icon** (`link_off` / `link`):
+    *   Click the **Link icon** (`link_off` / `link` 🔗):
         *   If a link URL is already set for the case, clicking this button will open that URL in a new tab.
         *   If no link is set, it will open the Notes/Status modal, allowing you to add one.
 
@@ -59,18 +59,18 @@ The Salesforce Enhancement Extension is designed to improve the user experience 
     *   Uses a modernized professional color palette for better visual distinction.
 *   **Urgent Case Management (via `urgencyManager.js`):**
     *   **Mark as Urgent:** Allows users to toggle a case's urgency. Urgent cases are highlighted with a distinct red background in list views.
-        Icon: `priority_high` (Normal), `priority_high` filled (Urgent)
+        Icon: `priority_high` (Normal) / `priority_high` (Urgent ⚠️)
     *   **Urgent Notes:** Users can add a specific note explaining the reason for urgency. This note is visible in the urgent button's tooltip.
     *   **General Notes:** Users can add general notes for any case. These notes are accessible via the notes button and are previewed in its tooltip.
     *   **Status Symbols & Custom Colors:**
         *   Assign a visual status symbol (e.g., Check, Warning, Flag, Workflow) to a case.
         *   Customize the color of the chosen status symbol using a color picker or predefined swatches.
         *   The notes button icon changes to reflect the selected symbol and color.
-        Icon: `edit_note` (No data), `edit_note` filled (Has note), or a custom symbol like `warning` filled (Has symbol)
+        Icon: `edit_note` (No data) / `edit_note` (Has note 📝) / Custom symbol (e.g., `warning` ⚠️)
     *   **Case-Specific Links:**
         *   Add a custom URL (e.g., to a specific document, external tool) to a case.
         *   A dedicated link button allows opening this URL directly or editing it via the notes modal.
-        Icon: `link_off` (No link), `link` (Link set)
+        Icon: `link_off` (No link) / `link` (Link set 🔗)
     *   **Comprehensive Modal Editor:** A modal allows editing all these metadata points (urgency, urgent note, general note, status symbol, symbol color, link URL) in one place. Includes a "Clear All" button within the modal to reset data for the specific case.
     *   **Data Persistence:** All metadata is stored locally in the browser's storage, specific to the user's browser profile.
 *   **"Load & Group" Functionality:**
